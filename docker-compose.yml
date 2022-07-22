@@ -1,16 +1,6 @@
 version: "3"
 
 services:
-  tests:
-    build:
-      context: ./tests
-    image: 'selenium-tests:latest'
-    networks: 
-      - default    
-    command: ["python3", "sample_docker_test.py"]
-    depends_on:
-      browser:
-        condition: service_healthy    
   browser:
     image: selenium/standalone-chrome:102.0
     ports:
@@ -23,3 +13,13 @@ services:
         timeout: 10s
         retries: 3
         start_period: 20s 
+  pytest:
+    build:
+      context: ./pytest
+    image: 'selenium-tests:latest'
+    networks: 
+      - default    
+    command: ["python3", "sample_docker_test.py"]
+    depends_on:
+      browser:
+        condition: service_healthy    

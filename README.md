@@ -6,10 +6,10 @@ This Python's example is generating PDF File or Screenshot File (PNG Image) from
  
 Helper commands:
 ```
-docker-compose build && docker-compose up -d tests
-docker logs -f sample_tests_1
-docker cp sample_tests_1:/tmp/file.pdf .
-docker cp sample_tests_1:/tmp/page.png .
+docker-compose build && docker-compose up -d pytest
+docker logs -f sample_pytest_1
+docker cp sample_pytest_1:/tmp/file.pdf .
+docker cp sample_pytest_1:/tmp/page.png .
 ```
 
 Helper links:
