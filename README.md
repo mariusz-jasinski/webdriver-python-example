@@ -1,5 +1,5 @@
-# Demo of Selenium WebDriver 
-Tests in Docker container. Chrome Browser runs in Docker too.
+# PDF Demo of Selenium WebDriver 
+Tests in Docker container. Chrome Browser runs in Docker too.  
 Python example is generating PDF File from any webPage.
 
 
