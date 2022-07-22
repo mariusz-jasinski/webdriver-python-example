@@ -11,7 +11,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.print_page_options import PrintOptions
-from seleniumwire import webdriver  # Import from seleniumwire
 
 # ./imageutil.py.py
 import imageutil
@@ -22,7 +21,7 @@ BROWSER_PATH = '/usr/bin/chromedriver'
 PAGE_URI = 'https://en.wikipedia.org/wiki/Main_Page'
 #PAGE_URI = 'https://httpbin.org/headers'
 DOWNLOAD_DIR = "/tmp"
-TOKEN_JWT = 'bearer any'
+TOKEN_JWT = 'bearer TEST'
 
 
 class Tests(unittest.TestCase):
@@ -35,17 +34,6 @@ class Tests(unittest.TestCase):
         #chrome_options.add_argument('--disable-notifications')
         #chrome_options.add_argument('--disable-dev-shm-usage')
         
-        hostname = socket.gethostname()
-        IPAddr = socket.gethostbyname(hostname)
-        wire_options = {
-            'addr': hostname
-        }
-
-        # Create a request interceptor
-        def header_interceptor(request):
-            del request.headers['Authorization']
-            request.headers['Authorization'] = TOKEN_JWT
-
         #  21.0 x 29.7cm, 8.27 x 11.69 inches
         printOptions = PrintOptions()
         printOptions.orientation = 'portrait'
@@ -53,16 +41,11 @@ class Tests(unittest.TestCase):
         printOptions.page_height = 29.7
         printOptions.scale = 0.90
 
-        print (wire_options)
-        # browserDriver = webdriver.Remote(command_executor=BROWSER_URL, options=chrome_options, seleniumwire_options=wire_options)
-        # browserDriver = webdriver.Remote(command_executor=BROWSER_URL, options=chrome_options)
-        browserDriver = webdriver.Chrome(service=Service(BROWSER_PATH), options=chrome_options)
+        browserDriver = webdriver.Remote(command_executor=BROWSER_URL, options=chrome_options)
+        # browserDriver = webdriver.Chrome(service=Service(BROWSER_PATH), options=chrome_options)
 
-        # Set the interceptor on the driver
-        browserDriver.request_interceptor = header_interceptor
         browserDriver.maximize_window()
         browserDriver.set_page_load_timeout(30)
-
         
         browserDriver.get(PAGE_URI)
         

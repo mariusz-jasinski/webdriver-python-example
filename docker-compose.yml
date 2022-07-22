@@ -16,7 +16,7 @@ services:
   pytest:
     build:
       context: ./pytest
-    image: 'selenium-tests:latest'
+    image: 'selenium-pytest:latest'
     networks: 
       - default    
     command: ["python3", "sample_docker_test.py"]
