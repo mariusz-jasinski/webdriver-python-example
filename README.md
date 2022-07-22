@@ -8,7 +8,8 @@ Helper commands:
 ```
 docker-compose build && docker-compose up -d tests
 docker logs -f sample_tests_1
-docker cp sample_tests_1:/tmp/file.pdf /vagrant/
+docker cp sample_tests_1:/tmp/file.pdf .
+docker cp sample_tests_1:/tmp/page.png .
 ```
 
 Helper links:

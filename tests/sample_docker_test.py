@@ -61,7 +61,7 @@ class Tests(unittest.TestCase):
 
         
         browserDriver.get(PAGE_URI)
-        print(browserDriver.get_screenshot_as_file('/tmp/strona.png'))
+        print(browserDriver.get_screenshot_as_file('/tmp/page.png'))
         # browserDriver.execute_script('window.print();')
         
         pdf64Text = browserDriver.print_page(printOptions)
