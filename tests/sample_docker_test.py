@@ -13,6 +13,9 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.print_page_options import PrintOptions
 from seleniumwire import webdriver  # Import from seleniumwire
 
+# ./imageutil.py.py
+import imageutil
+
 
 BROWSER_URL = 'http://browser:4444/wd/hub'
 BROWSER_PATH = '/usr/bin/chromedriver'
@@ -25,7 +28,7 @@ TOKEN_JWT = 'bearer any'
 class Tests(unittest.TestCase):
     def test_smth(self):
         chrome_options = Options()
-       
+        
         chrome_options.add_argument('--kiosk-printing')
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--enable-print-browser')
@@ -51,7 +54,8 @@ class Tests(unittest.TestCase):
         printOptions.scale = 0.90
 
         print (wire_options)
-        #browserDriver = webdriver.Remote(command_executor=BROWSER_URL, options=chrome_options, seleniumwire_options=wire_options)
+        # browserDriver = webdriver.Remote(command_executor=BROWSER_URL, options=chrome_options, seleniumwire_options=wire_options)
+        # browserDriver = webdriver.Remote(command_executor=BROWSER_URL, options=chrome_options)
         browserDriver = webdriver.Chrome(service=Service(BROWSER_PATH), options=chrome_options)
 
         # Set the interceptor on the driver
@@ -61,8 +65,9 @@ class Tests(unittest.TestCase):
 
         
         browserDriver.get(PAGE_URI)
-        print(browserDriver.get_screenshot_as_file('/tmp/page.png'))
-        # browserDriver.execute_script('window.print();')
+        
+        # print(browserDriver.get_screenshot_as_file('/tmp/page.png'))
+        imageutil.fullpage_screenshot(browserDriver, '/tmp/page.png')
         
         pdf64Text = browserDriver.print_page(printOptions)
         base64_bytes = pdf64Text.encode('ascii')
@@ -72,7 +77,6 @@ class Tests(unittest.TestCase):
             f.write(  message_bytes )
             f.close()
         
-        #time.sleep(3);
         browserDriver.close()
         browserDriver.quit()
         print(f'test finished')

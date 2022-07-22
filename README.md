@@ -1,6 +1,6 @@
 # PDF Demo of Selenium WebDriver 
 Tests in Docker container. Chrome Browser runs in Docker too.  
-Python example is generating PDF File from any webPage.
+This Python's example is generating PDF File or Screenshot File (PNG Image) from any webPage.
 
 
  
