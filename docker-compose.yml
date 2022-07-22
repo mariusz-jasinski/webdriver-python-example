@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  tests:
+    build:
+      context: ./tests
+    image: 'selenium-tests:latest'
+    networks: 
+      - default    
+    command: ["python3", "sample_docker_test.py"]
+    depends_on:
+      browser:
+        condition: service_healthy    
+  browser:
+    image: selenium/standalone-chrome:102.0
+    ports:
+      - '${NO_VNC_PORT}:7900'
+      - 4444:4444
+    shm_size: 2g
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:4444"]
+        interval: 30s
+        timeout: 10s
+        retries: 3
+        start_period: 20s 
